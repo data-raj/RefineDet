@@ -36,10 +36,14 @@ RUN git clone -b ${CLONE_TAG} --depth 1 https://github.com/sfzhang15/RefineDet.g
 RUN sudo pip install --upgrade --ignore-installed six pip && \
     for req in $(cat python/requirements.txt) pydot easydict; do pip install $req; done && \
     make py -j"$(nproc)"
+    
+RUN pip3 install opencv-python
+RUN pip3 install opencv-contrib-python
 
 ENV PYCAFFE_ROOT $CAFFE_ROOT/python
 ENV PYTHONPATH $PYCAFFE_ROOT:$PYTHONPATH
 ENV PATH $CAFFE_ROOT/build/tools:$PYCAFFE_ROOT:$PATH
 RUN echo "$CAFFE_ROOT/build/lib" >> /etc/ld.so.conf.d/caffe.conf && ldconfig
+RUN "usr/lib/x86_64-linux-gnu" >> /etc/ld.so.conf.d/opencv.conf && ldconfig
 
 WORKDIR /workspace
