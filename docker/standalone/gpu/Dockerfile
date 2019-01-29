@@ -46,4 +46,4 @@ ENV PATH $CAFFE_ROOT/build/tools:$PYCAFFE_ROOT:$PATH
 RUN echo "$CAFFE_ROOT/build/lib" >> /etc/ld.so.conf.d/caffe.conf && ldconfig
 RUN "usr/lib/x86_64-linux-gnu" >> /etc/ld.so.conf.d/opencv.conf && ldconfig
 
-WORKDIR /workspace
+#WORKDIR /workspace
